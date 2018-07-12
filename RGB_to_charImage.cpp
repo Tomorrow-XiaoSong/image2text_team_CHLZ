@@ -6,6 +6,7 @@
 using namespace std;
 using namespace cv;
 
+
 void RGB_to_char_image(string input_image_address, string output_image_address)
 {												//!!!输入 读、存图片的地址（此处可以在界面优化，例如戳C盘->戳desktop->戳图片）
 	//读取图片					
@@ -30,17 +31,74 @@ void RGB_to_char_image(string input_image_address, string output_image_address)
 	}
 
 	//huidu_matrix 转 字符画
-	char huidu_char[8] = "@#xo+- ";							 	//灰度字符													
-	char* char_image = new char[nl*nc + 1];					 		//字符画矩阵
-	for (int j = 0; j < nl; j++) {							 	//根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
-		for (int i = 0; i < nc; i++) {						 	//0-35:@   36-71:#   72-108:x   109-144:o   145-180:+   181-216:-   217-255: 
-			if (huidu_matrix[j*nc + i] <= 35)char_image[j*nc + i] = huidu_char[0];
-			else if (huidu_matrix[j*nc + i] <= 71)char_image[j*nc + i] = huidu_char[1];
-			else if (huidu_matrix[j*nc + i] <= 108)char_image[j*nc + i] = huidu_char[2];
-			else if (huidu_matrix[j*nc + i] <= 144)char_image[j*nc + i] = huidu_char[3];
-			else if (huidu_matrix[j*nc + i] <= 180)char_image[j*nc + i] = huidu_char[4];
-			else if (huidu_matrix[j*nc + i] <= 216)char_image[j*nc + i] = huidu_char[5];
-			else char_image[j*nc + i] = huidu_char[6];
+	char* char_image = new char[nl*nc + 1];					 //字符画矩阵
+	//低像素替换——真·字符画
+	if (nl <= 300) {
+		char huidu_char[] = { 'R','E','B','Q','P','D','u','i','c','v',';',':','\'','.',' ' };
+		for (int j = 0; j < nl; j++) {							 //根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
+			for (int i = 0; i < nc; i++) {
+				if (huidu_matrix[j*nc + i] <= 4)char_image[j*nc + i] = huidu_char[0];
+				else if (huidu_matrix[j*nc + i] <= 8)char_image[j*nc + i] = huidu_char[1];
+				else if (huidu_matrix[j*nc + i] <= 12)char_image[j*nc + i] = huidu_char[0];
+				else if (huidu_matrix[j*nc + i] <= 16)char_image[j*nc + i] = huidu_char[1];
+				else if (huidu_matrix[j*nc + i] <= 20)char_image[j*nc + i] = huidu_char[0];
+				else if (huidu_matrix[j*nc + i] <= 24)char_image[j*nc + i] = huidu_char[1];
+				else if (huidu_matrix[j*nc + i] <= 28)char_image[j*nc + i] = huidu_char[0];
+				else if (huidu_matrix[j*nc + i] <= 32)char_image[j*nc + i] = huidu_char[1];
+				else if (huidu_matrix[j*nc + i] <= 36)char_image[j*nc + i] = huidu_char[2];
+				else if (huidu_matrix[j*nc + i] <= 40)char_image[j*nc + i] = huidu_char[3];
+				else if (huidu_matrix[j*nc + i] <= 44)char_image[j*nc + i] = huidu_char[2];
+				else if (huidu_matrix[j*nc + i] <= 48)char_image[j*nc + i] = huidu_char[3];
+				else if (huidu_matrix[j*nc + i] <= 52)char_image[j*nc + i] = huidu_char[2];
+				else if (huidu_matrix[j*nc + i] <= 56)char_image[j*nc + i] = huidu_char[3];
+				else if (huidu_matrix[j*nc + i] <= 60)char_image[j*nc + i] = huidu_char[2];
+				else if (huidu_matrix[j*nc + i] <= 64)char_image[j*nc + i] = huidu_char[3];
+				else if (huidu_matrix[j*nc + i] <= 68)char_image[j*nc + i] = huidu_char[4];
+				else if (huidu_matrix[j*nc + i] <= 72)char_image[j*nc + i] = huidu_char[5];
+				else if (huidu_matrix[j*nc + i] <= 76)char_image[j*nc + i] = huidu_char[4];
+				else if (huidu_matrix[j*nc + i] <= 80)char_image[j*nc + i] = huidu_char[5];
+				else if (huidu_matrix[j*nc + i] <= 84)char_image[j*nc + i] = huidu_char[4];
+				else if (huidu_matrix[j*nc + i] <= 88)char_image[j*nc + i] = huidu_char[5];
+				else if (huidu_matrix[j*nc + i] <= 92)char_image[j*nc + i] = huidu_char[4];
+				else if (huidu_matrix[j*nc + i] <= 96)char_image[j*nc + i] = huidu_char[5];
+				else if (huidu_matrix[j*nc + i] <= 100)char_image[j*nc + i] = huidu_char[6];
+				else if (huidu_matrix[j*nc + i] <= 104)char_image[j*nc + i] = huidu_char[7];
+				else if (huidu_matrix[j*nc + i] <= 108)char_image[j*nc + i] = huidu_char[6];
+				else if (huidu_matrix[j*nc + i] <= 112)char_image[j*nc + i] = huidu_char[7];
+				else if (huidu_matrix[j*nc + i] <= 116)char_image[j*nc + i] = huidu_char[6];
+				else if (huidu_matrix[j*nc + i] <= 120)char_image[j*nc + i] = huidu_char[7];
+				else if (huidu_matrix[j*nc + i] <= 124)char_image[j*nc + i] = huidu_char[6];
+				else if (huidu_matrix[j*nc + i] <= 128)char_image[j*nc + i] = huidu_char[7];
+				else if (huidu_matrix[j*nc + i] <= 132)char_image[j*nc + i] = huidu_char[8];
+				else if (huidu_matrix[j*nc + i] <= 136)char_image[j*nc + i] = huidu_char[9];
+				else if (huidu_matrix[j*nc + i] <= 140)char_image[j*nc + i] = huidu_char[8];
+				else if (huidu_matrix[j*nc + i] <= 144)char_image[j*nc + i] = huidu_char[9];
+				else if (huidu_matrix[j*nc + i] <= 148)char_image[j*nc + i] = huidu_char[8];
+				else if (huidu_matrix[j*nc + i] <= 152)char_image[j*nc + i] = huidu_char[9];
+				else if (huidu_matrix[j*nc + i] <= 156)char_image[j*nc + i] = huidu_char[8];
+				else if (huidu_matrix[j*nc + i] <= 160)char_image[j*nc + i] = huidu_char[9];
+				else if (huidu_matrix[j*nc + i] <= 164)char_image[j*nc + i] = huidu_char[8];
+				else if (huidu_matrix[j*nc + i] <= 171)char_image[j*nc + i] = huidu_char[10];
+				else if (huidu_matrix[j*nc + i] <= 178)char_image[j*nc + i] = huidu_char[11];
+				else if (huidu_matrix[j*nc + i] <= 185)char_image[j*nc + i] = huidu_char[12];
+				else if (huidu_matrix[j*nc + i] <= 215)char_image[j*nc + i] = huidu_char[13];
+				else char_image[j*nc + i] = huidu_char[14];
+			}
+		}
+	}
+	//无损替换
+	else {
+		char huidu_char[] = "@#xo+. ";
+		for (int j = 0; j < nl; j++) {							 //根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
+			for (int i = 0; i < nc; i++) {						 //0-35:@   36-71:#   72-108:x   109-144:o   145-180:+   181-216:-   217-255: 
+				if (huidu_matrix[j*nc + i] <= 35)char_image[j*nc + i] = huidu_char[0];
+				else if (huidu_matrix[j*nc + i] <= 71)char_image[j*nc + i] = huidu_char[1];
+				else if (huidu_matrix[j*nc + i] <= 108)char_image[j*nc + i] = huidu_char[2];
+				else if (huidu_matrix[j*nc + i] <= 144)char_image[j*nc + i] = huidu_char[3];
+				else if (huidu_matrix[j*nc + i] <= 180)char_image[j*nc + i] = huidu_char[4];
+				else if (huidu_matrix[j*nc + i] <= 216)char_image[j*nc + i] = huidu_char[5];
+				else char_image[j*nc + i] = huidu_char[6];
+			}
 		}
 	}
 
