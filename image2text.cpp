@@ -15,24 +15,46 @@ Image2Text::~Image2Text() {
 	delete[] char_image;
 	delete[] color_matrix.matrix;
 }
-Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int width, int height) 			//返回值为类内声明的结构体
+Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int width, int height) //返回值为类内声明的结构体
 {
-	//彩图 转 灰度图片
-	Mat huidu_image;
+
+	//彩图 转 灰度图片 
+	Mat huidu_image, result_image;
 	cvtColor(RGB, huidu_image, COLOR_BGR2GRAY);							//直接调用cvtColor函数，通过第三个参数设置转换方式为彩图转灰度图片
 
-	//未完成——灰度图片压缩：把灰度图片huidu_image压缩为宽度为width,高度为height
-
+																		//输出像素值的变化
+	if (width == NONDESTRUCTIVE_WIDTH && huidu_image.cols < NONDESTRUCTIVE_WIDTH && huidu_image.rows < NONDESTRUCTIVE_HEIGHT) {
+		//当未设置输出图片宽度宽度且图片宽高分别比NONDESTRUCTIVE_WIDTH和NONDESTRUCTIVE_HEIGHT小时，不对图片进行操作
+		result_image = huidu_image.clone();
+	}
+	else {
+		int image_width = huidu_image.cols;								//初始值为输入图像宽度，会随图片压缩处理而改变
+		int image_height = huidu_image.rows;							//初始值为输入图像高度，会随图片压缩处理而改变
+		if (width == NONDESTRUCTIVE_WIDTH) {							//当用户没有自定义输出图片的宽度时
+			if (image_width >= NONDESTRUCTIVE_WIDTH) {					//宽度判断优先，若图片像素宽度大于NONDESTRUCTIVE_WIDTH，则以宽度为NONDESTRUCTIVE_WIDTH对图片按比例缩小
+				height = image_height * (NONDESTRUCTIVE_WIDTH / ((double)image_width));
+				image_height = height;
+				width = NONDESTRUCTIVE_WIDTH;
+			}
+			if (image_height >= NONDESTRUCTIVE_HEIGHT) {				//判断高度（包括宽度不符合时经处理变化后的高度）是否符合
+																		//若图片像素高度大于NONDESTRUCTIVE_HEIGHT，则以高度为NONDESTRUCTIVE_HEIGHT对图片按比例进行缩小
+				width = image_width * (NONDESTRUCTIVE_HEIGHT / ((double)image_height));
+				height = NONDESTRUCTIVE_HEIGHT;
+			}
+		}
+		resize(huidu_image, result_image, Size(width, height));			//对图片进行宽度改为width，高度改为height的变化
+	}
 
 	//灰度图片 转 灰度矩阵
-	int nl = huidu_image.rows;									//行数  
-	int nc = huidu_image.cols * huidu_image.channels();						//列数 = 像素点列数*通道数（此处为灰度图片只有一个gray通道。彩色图片有RGB三个通道）
-	huidu_matrix.matrix = new int[nl*nc + 1];							//定义灰度矩阵，用一维数组表示二维数组，便于后边操作
-	huidu_matrix.width = nc;									//灰度矩阵宽度赋值
-	huidu_matrix.height = nl;									//灰度矩阵高度赋值
+	int nl = result_image.rows;								//行数  
+	int nc = result_image.cols;								//列数
+	huidu_matrix.matrix = new int[nl*(nc * result_image.channels()) + 1];				//定义灰度矩阵，用一维数组表示二维数组，便于后边操作
+																						//矩阵列数 = 像素点列数*通道数（此处为灰度图片只有一个gray通道。彩色图片有RGB三个通道）
+	huidu_matrix.width = nc;								//灰度矩阵宽度赋值
+	huidu_matrix.height = nl;								//灰度矩阵高度赋值
 	for (int j = 0; j<nl; j++) {
-		uchar* data = huidu_image.ptr<uchar>(j);						//data记录图片每行像素的起始地址,ptr<uchar>(j)获得第j行的头指针，<uchar>是图片中的数据类型
-		for (int i = 0; i<nc; i++) {								//将该行地址下的所有像素记录到灰度矩阵的对应行中
+		uchar* data = result_image.ptr<uchar>(j);			//data记录图片每行像素的起始地址,ptr<uchar>(j)获得第j行的头指针，<uchar>是图片中的数据类型
+		for (int i = 0; i<nc; i++) {						//将该行地址下的所有像素记录到灰度矩阵的对应行中
 			huidu_matrix.matrix[j*nc + i] = data[i];
 		}
 	}
