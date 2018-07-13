@@ -61,7 +61,7 @@ public:
 	void to_txt(string output_address,int type_of_outputImage,int width = NONDESTRUCTIVE_WIDTH,int height = NONDESTRUCTIVE_HEIGHT);
 								//根据用户选择输出.txt，可以是无损，也可以是字符画
 
-	void to_html(string output_address);			//输出.html
+	void to_html(string output_address，int width = NONDESTRUCTIVE_WIDTH,int height = NONDESTRUCTIVE_HEIGHT);			//输出.html
 
 };
 

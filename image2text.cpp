@@ -111,14 +111,40 @@ void Image2Text::to_txt(string output_address, int type_of_outputImage, int widt
 }
 
 
-void Image2Text::to_html(string output_address)
+void Image2Text::to_html(string output_address,int width, int height)
 {
+	char * result_image;										//记录生成的字符画矩阵
+	int nl, nc;											//记录生成的字符画矩阵的宽度nc，高度nl
+	result_image = huiduMatrix_to_charImage(RGB_to_huiduMatrix(this->input_image, width, height));
+	nl = RGB_to_huiduMatrix(this->input_image, width, height).height;
+	nc = RGB_to_huiduMatrix(this->input_image, width, height).width;
 	//标准化输出文件的命名格式为 xxx.html
 	if (output_address.substr(output_address.length() - 5, 5) != ".html") {
 	output_address += ".html";
 	}
 	
-	//未完成——输出html
+	ofstream f(output_address, ios::out);
+	f<<"<html>\n";
+	f<<"<head>\n";
+	f<<"<title>字符画<\/title>\n";
+	f<<"<\/head>\n";
+	f<<"<body>\n";
+	f<<"<div style=\"font-size:1px;line-height:0px\">\n";
+ 	for (int j = 0; j < nl; j++) 
+	{
+		f<<"<p>";
+ 		for (int i = 0; i < nc; i++) 
+		{
+ 			f << char_image[j*nc + i];
+ 			f << char_image[j*nc + i];
+ 		}
+		f<<"<\/p>";
+ 		f << '\n';
+ 	}
+	f<<"<\/div>";
+	f<<"<\/body>";
+	f<<"<\/html>";
+ 	f.close();//输出html
 	cerr << "the function hadn't\"to_html\" been finish...\n";
 	system("pause");
 	exit(0);
