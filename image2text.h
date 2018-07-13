@@ -58,6 +58,9 @@ private:
 								//可以不给长宽参数，默认为NONDESTRUCTIVE_WIDTH和NONDESTRUCTIVE_HEIGHT
 								//可以只给一个参数：width，height会设置为NONDESTRUCTIVE_HEIGHT
 								//但注意不能只给height
+	
+	colorMatrix RGB_to_colorMatrix(Mat RGB, int width = COLORHTML_WIDTH, int height = COLORHTML_HEIGHT);
+								//返回值为彩色图片矩阵的结构体，该结构体内有：彩色像素结构体矩阵指针，彩色像素结构体矩阵的长、高
 
 	char* huiduMatrix_to_charImage(const huiduMatrix &huiduMatrix);
 								//灰度矩阵 转 字符画，返回值可以做完.txt 或者 .html的文件内容
