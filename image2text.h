@@ -1,3 +1,4 @@
+
 /*************************************用户调用指南*****************************************/
 /***   1、用户定义Image2Text类的一个对象的同时要给对象提供构造参数：输入图片的地址           ***/
 /***   	例：Image2Text test("C:\\picture.jpg"）                                         ***/
@@ -39,6 +40,16 @@ private:
 		int width;
 		int height;
 	} huidu_matrix;						//实例化对象：huidu_matrix
+	typedef struct colorPx {				//彩色像素结构体，每个对象有RGB三种参数
+		int Red;
+		int Green;
+		int Blue;
+	};
+	struct colorMatrix {					//彩色矩阵结构体
+		colorPx* matrix;				//彩色像素结构体矩阵指针
+		int width;					//记录该结构体矩阵的宽度
+		int height;					//记录该结构体矩阵的高度
+	}color_matrix;						//实例化对象
 	Mat input_image;					//记录输入的图片
 	char* char_image;					//字符画数组
 
