@@ -144,26 +144,26 @@ void Image2Text::to_html(string output_address,int width, int height)
 	
 	ofstream f(output_address, ios::out);
 	f<<"<?xml version="1.0" encoding="UTF-8"?>\n"
-	f<<"<!DOCTYPE html PUBLIC \"-\/\/W3C\/\/DTD XHTML 1.1\/\/EN\" \"http:\/\/www.w3.org\/TR\/xhtml11\/DTD\/xhtml11.dtd\">\n"
-	f<<"<html xmlns=\"http:\/\/www.w3.org\/1999\/xhtml\" xml:lang=\"en\">\n"
-	f<<"<head>\n"
-	f<<"<title>字符画<\/title>\n"
-	f<<"<meta name=\"generator\" content=\"Ascgen dotNET 2.0.0\" \/>\n"
-	f<<"<style type=\"text\/css\">\n"
-	f<<"<!--\n"
-	f<<"#ascgen-image pre {\n"
-	f<<"font-family: \"Lucida Console\", monospace;\n"
-	f<<"font-size: 9pt;\n"
-	f<<"background-color: #FFFFFF;\n"
-	f<<"color: #000000;\n"
-	f<<"float: left;\n"
-	f<<"line-height: 12px;\n"
-	f<<"border: 1px solid #000000;\n"
-	f<<"}\"\n"
-	f<<"<\/style>\n"
-	f<<"<\/head>\n"
-	f<<"<body>\n"
-	f<<"<div id=\"ascgen-image\">\n"
+	f<<"<!DOCTYPE html PUBLIC \"-\/\/W3C\/\/DTD XHTML 1.1\/\/EN\" \"http:\/\/www.w3.org\/TR\/xhtml11\/DTD\/xhtml11.dtd\">\n";
+	f<<"<html xmlns=\"http:\/\/www.w3.org\/1999\/xhtml\" xml:lang=\"en\">\n";
+	f<<"<head>\n";
+	f<<"<title>字符画<\/title>\n";
+	f<<"<meta name=\"generator\" content=\"Ascgen dotNET 2.0.0\" \/>\n";
+	f<<"<style type=\"text\/css\">\n";
+	f<<"<!--\n";
+	f<<"#ascgen-image pre {\n";
+	f<<"font-family: \"Lucida Console\", monospace;\n";
+	f<<"font-size: 9pt;\n";
+	f<<"background-color: #FFFFFF;\n";
+	f<<"color: #000000;\n";
+	f<<"float: left;\n";
+	f<<"line-height: 12px;\n";
+	f<<"border: 1px solid #000000;\n";
+	f<<"}\"\n";
+	f<<"<\/style>\n";
+	f<<"<\/head>\n";
+	f<<"<body>\n";
+	f<<"<div id=\"ascgen-image\">\n";
  	for (int j = 0; j < nl; j++) 
 	{
 		f<<"<p>";
