@@ -13,6 +13,7 @@ Image2Text::Image2Text(string input_image_address)
 Image2Text::~Image2Text() {
 	delete[] huidu_matrix.matrix;
 	delete[] char_image;
+	delete[] color_matrix.matrix;
 }
 Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int width, int height) 			//返回值为类内声明的结构体
 {
@@ -36,6 +37,24 @@ Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int width, int h
 		}
 	}
 	return huidu_matrix;
+}
+
+Image2Text::colorMatrix Image2Text::RGB_to_colorMatrix(Mat RGB, int width, int height)
+{
+	int nl = RGB.rows;
+	int nc = RGB.cols;
+	color_matrix.matrix = new colorPx[nl*(nc * RGB.channels()) + 1];
+	color_matrix.width = nc;
+	color_matrix.height = nl;
+	for (int j = 0; j < nl; j++) {
+		uchar* color_data = RGB.ptr<uchar>(j);
+		for (int i = 0; i < nc; i++) {								//图片颜色三通道排列顺序：绿，红，蓝
+			color_matrix.matrix[i].Green = color_data[3 * i + 1];
+			color_matrix.matrix[i].Red = color_data[3 * i + 2];
+			color_matrix.matrix[i].Blue = color_data[3 * i + 3];
+		}
+	}
+	return color_matrix;
 }
 
 char* Image2Text::huiduMatrix_to_charImage(const huiduMatrix &huiduMatrix)
