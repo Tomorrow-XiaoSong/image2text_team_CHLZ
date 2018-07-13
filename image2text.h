@@ -1,4 +1,5 @@
 
+
 /*************************************用户调用指南*****************************************/
 /***   1、用户定义Image2Text类的一个对象的同时要给对象提供构造参数：输入图片的地址           ***/
 /***   	例：Image2Text test("C:\\picture.jpg"）                                         ***/
@@ -26,6 +27,8 @@
 #define NONDESTRUCTIVE_HEIGHT 500
 #define CHARIMAGE_WIDTH 70
 #define CHARIMAGE_HEIGHT 70
+#define COLORHTML_WIDTH 120
+#define COLORHTML_HEIGHT 80
 enum pictureQuality { NONDESTRUCTIVEIMAGE, CHARIMAGE };
 								//枚举
 
