@@ -69,6 +69,7 @@ Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int type, int wi
 				if (image_height >= CHARIMAGE_HEIGHT) {			//判断高度（包括宽度不符合时经处理变化后的高度）是否符合
 																			//若图片像素高度大于CHARIMAGE_HEIGHT，则以高度为CHARIMAGE_HEIGHT对图片按比例进行缩小
 					width = image_width * (CHARIMAGE_HEIGHT / ((double)image_height));
+
 					height = CHARIMAGE_HEIGHT;
 				}
 			}
@@ -96,6 +97,32 @@ Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int type, int wi
 																	//若图片像素高度大于CHARHTML_HEIGHT，则以高度为CHARHTML_HEIGHT对图片按比例进行缩小
 					width = image_width * (CHARHTML_HEIGHT / ((double)image_height));
 					height = CHARHTML_HEIGHT;
+				}
+			}
+			resize(huidu_image, result_image, Size(width, height));		//对图片进行宽度改为width，高度改为height的变化
+		}
+		break;
+	}
+	case COLOR_HTML:
+	{
+											//输出像素值的变化
+		if (width == NONINPUT && huidu_image.cols <= COLORHTML_WIDTH && huidu_image.rows <= COLORHTML_HEIGHT) {
+											//当未设置输出图片宽度宽度且图片宽高分别比COLORHTML_WIDTH和COLORHTML_HEIGHT小时，不对图片进行操作
+			result_image = huidu_image.clone();
+		}
+		else {
+			int image_width = huidu_image.cols;				//初始值为输入图像宽度，会随图片压缩处理而改变
+			int image_height = huidu_image.rows;				//初始值为输入图像高度，会随图片压缩处理而改变
+			if (width == NONINPUT || width >COLORHTML_WIDTH || height > COLORHTML_HEIGHT) {							//当用户没有自定义输出图片的宽度时
+				if (image_width >= COLORHTML_WIDTH) {			//宽度判断优先，若图片像素宽度大于COLORHTML_WIDTH，则以宽度为COLORHTML_WIDTH对图片按比例缩小
+					height = image_height * (COLORHTML_WIDTH / ((double)image_width));
+					image_height = height;
+					width = COLORHTML_WIDTH;
+				}
+				if (image_height >= COLORHTML_HEIGHT) {			//判断高度（包括宽度不符合时经处理变化后的高度）是否符合
+																//若图片像素高度大于COLORHTML_HEIGHT，则以高度为COLORHTML_HEIGHT对图片按比例进行缩小
+					width = image_width * (COLORHTML_HEIGHT / ((double)image_height));
+					height = COLORHTML_HEIGHT;
 				}
 			}
 			resize(huidu_image, result_image, Size(width, height));		//对图片进行宽度改为width，高度改为height的变化
@@ -152,7 +179,7 @@ else {
 	}
 	resize(RGB, this_RGB, Size(width, height));					//对图片进行宽度改为width，高度改为height的变化
 }
-	
+	//彩图 转 彩图矩阵
 	int nl = this_RGB.rows;
 	int nc = this_RGB.cols;
 	color_matrix.matrix = new colorPx[nl*(nc * this_RGB.channels()) + 1];
@@ -161,9 +188,9 @@ else {
 	for (int j = 0; j < nl; j++) {
 		uchar* color_data = this_RGB.ptr<uchar>(j);
 		for (int i = 0; i < nc; i++) {						//图片颜色三通道排列顺序：绿，红，蓝
-			color_matrix.matrix[i].Green = color_data[3 * i + 1];
-			color_matrix.matrix[i].Red = color_data[3 * i + 2];
-			color_matrix.matrix[i].Blue = color_data[3 * i + 3];
+			color_matrix.matrix[j*nc + i].Green = color_data[3 * i + 1];
+			color_matrix.matrix[j*nc + i].Red = color_data[3 * i + 2];
+			color_matrix.matrix[j*nc + i].Blue = color_data[3 * i + 3];
 		}
 	}
 	return color_matrix;
@@ -197,6 +224,33 @@ char* Image2Text::huiduMatrix_to_charImage(const huiduMatrix &huiduMatrix)
 }
 
 char* Image2Text::huiduMatrix_to_charHtml(const huiduMatrix &huiduMatrix)
+{
+	char huidu_char[] = "EBQDPLbqyzvi;:,.";						//灰度字符————未完成————未优化
+	char_image = new char[huidu_matrix.height*huidu_matrix.width + 1];
+	for (int j = 0; j < huidu_matrix.height; j++) {					//根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
+		for (int i = 0; i < huidu_matrix.width; i++) {
+			if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 16)char_image[j*huidu_matrix.width + i] = huidu_char[0];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 32)char_image[j*huidu_matrix.width + i] = huidu_char[1];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 48)char_image[j*huidu_matrix.width + i] = huidu_char[2];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 64)char_image[j*huidu_matrix.width + i] = huidu_char[3];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 80)char_image[j*huidu_matrix.width + i] = huidu_char[4];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 96)char_image[j*huidu_matrix.width + i] = huidu_char[5];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 112)char_image[j*huidu_matrix.width + i] = huidu_char[6];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 128)char_image[j*huidu_matrix.width + i] = huidu_char[7];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 144)char_image[j*huidu_matrix.width + i] = huidu_char[8];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 160)char_image[j*huidu_matrix.width + i] = huidu_char[9];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 176)char_image[j*huidu_matrix.width + i] = huidu_char[10];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 192)char_image[j*huidu_matrix.width + i] = huidu_char[11];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 208)char_image[j*huidu_matrix.width + i] = huidu_char[12];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 224)char_image[j*huidu_matrix.width + i] = huidu_char[13];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 240)char_image[j*huidu_matrix.width + i] = huidu_char[14];
+			else char_image[j*huidu_matrix.width + i] = huidu_char[15];
+		}
+	}
+	return char_image;
+}
+
+char* Image2Text::huiduMatrix_to_colorCharHtml(const huiduMatrix &huiduMatrix)
 {
 	char huidu_char[] = "EBQDPLbqyzvi;:,.";						//灰度字符————未完成————未优化
 	char_image = new char[huidu_matrix.height*huidu_matrix.width + 1];
