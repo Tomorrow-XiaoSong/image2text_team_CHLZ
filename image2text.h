@@ -33,7 +33,7 @@
 #define NONDESTRUCTIVE_COLORHTML_HEIGHT 210
 #define COLORHTML_WIDTH 70
 #define COLORHTML_HEIGHT 70
-enum pictureQuality { NONDESTRUCTIVE_TXT, CHAR_TXT,COLOR_HTML,CHAR_HTML };
+enum outputMode { NONDESTRUCTIVE_TXT, CHAR_TXT, CHAR_HTML, COLOR_HTML, NONDESTRUCTIVE_HTML, REVERSAL_CHAR_TXT, REVERSAL_NONDESTRUCTIVE_TXT };
 								//用户输出模式 枚举
 enum format { HTML, TXT };					//用户输出文件格式控制，枚举
 
@@ -73,17 +73,19 @@ private:
 	colorMatrix RGB_to_colorMatrix(Mat RGB, int width = NONINPUT, int height = NONINPUT);
 								//返回值为彩色图片矩阵的结构体，该结构体内有：彩色像素结构体矩阵指针，彩色像素结构体矩阵的长、高
 
-	char* huiduMatrix_to_charImage(const huiduMatrix &huiduMatrix);
+	char* huiduMatrix_to_charTXT(const huiduMatrix &huiduMatrix, int type = CHAR_TXT);
 								//灰度矩阵 转 字符画，返回值可以做为.txt文件内容
-
+								//type可选择正常输出或者反转输出
+	
 	char* huiduMatrix_to_charHtml(const huiduMatrix &huiduMatrix);
 								//灰度矩阵 转 字符画，返回值可以做为.html文件内容
 	
 	char* huiduMatrix_to_colorCharHtml(const huiduMatrix &huiduMatrix);
 								//彩图的灰度矩阵 转 字符画，返回值可以做为.html文件内容
 	
-	char* huiduMatrix_to_nondestructiveImage(const huiduMatrix &huidu_matrix);
+	char* huiduMatrix_to_nondestructiveImage(const huiduMatrix &huidu_matrix,int type = NONDESTRUCTIVE_TXT);
 								//灰度矩阵 转 无损画，返回值仅能作为.txt 的文件内容
+								//type可选择正常输出或者反转输出
 	
 public:
 	Image2Text(string input_image_address);
@@ -93,8 +95,6 @@ public:
 
 	void to_html(string output_address,int width = NONINPUT, int height = NONINPUT);
 								//输出.html
-
-	//字符反转函数——未完成
 };
 
 
