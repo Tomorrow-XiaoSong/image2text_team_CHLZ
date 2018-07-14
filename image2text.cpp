@@ -1,4 +1,3 @@
-
 #include"image2text.h"
 
 
@@ -17,7 +16,7 @@ Image2Text::~Image2Text() {
 	delete[] color_matrix.matrix;
 }
 
-void Image2Text::control_output_format(string outputAddress, int outputFormat)
+void Image2Text::control_output_format(string& outputAddress, int outputFormat)
 {
 	//根据地址string后几位，判断后几位是否为.txt 或 .html，不是的话，在地址结尾加上
 	switch (outputFormat)
