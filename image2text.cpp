@@ -487,40 +487,90 @@ void Image2Text::to_txt(string output_address, int type_of_outputImage, int widt
 	f.close();
 }
 
-
-void Image2Text::to_html(string output_address, int width, int height)
+void Image2Text::to_html(string output_address, int type_of_output, int width, int height)
 {
-	char * result_image;								//记录生成的字符画矩阵
-	int nl, nc;									//记录生成的字符画矩阵的宽度nc，高度nl
-	result_image = huiduMatrix_to_charHtml(RGB_to_huiduMatrix(this->input_image,CHAR_HTML, width, height));
-	nl = RGB_to_huiduMatrix(this->input_image,CHAR_HTML, width, height).height;
-	nc = RGB_to_huiduMatrix(this->input_image,CHAR_HTML, width, height).width;
-	
-	//标准化输出文件的命名格式为 xxx.html
-	control_output_format(output_address, HTML);
-	
-	//.html文件生成保存
-	ofstream f(output_address, ios::out);
-	f << "<html>\n";
-	f << "<head>\n";
-	f << "<title>字符画<\/title>\n";
-	f << "<\/head>\n";
-	f << "<body>\n";
-	f << "<div style=\"font-size:10px;font-family:宋体;line-height:0px\">\n";
-	for (int j = 0; j < nl; j++)
+	switch (type_of_output)
 	{
-		f << "<p>";
-		for (int i = 0; i < nc; i++)
+	case CHAR_HTML:
+	{
+		char * result_image;								//记录生成的字符画矩阵
+		int nl, nc;									//记录生成的字符画矩阵的宽度nc，高度nl
+		result_image = huiduMatrix_to_charHtml(RGB_to_huiduMatrix(this->input_image, CHAR_HTML, width, height));
+		nl = RGB_to_huiduMatrix(this->input_image, CHAR_HTML, width, height).height;
+		nc = RGB_to_huiduMatrix(this->input_image, CHAR_HTML, width, height).width;
+
+		//标准化输出文件的命名格式为 xxx.html
+		control_output_format(output_address, HTML);
+
+		//.html文件生成保存
+		ofstream f(output_address, ios::out);
+		f << "<html>\n";
+		f << "<head>\n";
+		f << "<title>字符画<\/title>\n";
+		f << "<\/head>\n";
+		f << "<body>\n";
+		f << "<div style=\"font-size:10px;font-family:宋体;line-height:0px\">\n";
+		for (int j = 0; j < nl; j++)
 		{
-			f << char_image[j*nc + i];
-			f << char_image[j*nc + i];
+			f << "<p>";
+			for (int i = 0; i < nc; i++)
+			{
+				f << char_image[j*nc + i];
+				f << char_image[j*nc + i];
+			}
+			f << "<\/p>";
+			f << '\n';
 		}
-		f << "<\/p>";
-		f << '\n';
+		f << "<\/div>";
+		f << "<\/body>";
+		f << "<\/html>";
+		f.close();
+		break;
 	}
-	f << "<\/div>";
-	f << "<\/body>";
-	f << "<\/html>";
-	f.close();
+	case COLOR_HTML:
+	{
+		colorMatrix result_matrix = RGB_to_colorMatrix(this->input_image, width, height);
+		char * result_image = huiduMatrix_to_colorCharHtml(RGB_to_huiduMatrix(this->input_image, COLOR_HTML, width, height));
+		int nl, nc;
+		nl = result_matrix.height;
+		nc = result_matrix.width;
+
+		//标准化输出文件的命名格式为 xxx.html
+		control_output_format(output_address, HTML);
+
+		//.html文件生成保存
+		ofstream f(output_address, ios::out);
+		f << "<html>\n";
+		f << "<head>\n";
+		f << "<title>字符画<\/title>\n";
+		f << "<\/head>\n";
+		f << "<body>\n";
+		f << "<div style=\"font-size:10px;font-family:宋体;line-height:0px\">\n";
+		for (int j = 0; j < nl; j++)
+		{
+			f << "<p>";
+			for (int i = 0; i < nc; i++)
+			{
+				f << "<a style=\"color:rgb(" << result_matrix.matrix[j*nc + i].Red << "," << result_matrix.matrix[j*nc + i].Green << "," << result_matrix.matrix[j*nc + i].Blue << ")\">";
+				f << result_image[j*nc + i];
+				f << result_image[j*nc + i];
+				f << "<\/a>";
+			}
+			f << "<\/p>";
+			f << '\n';
+		}
+		f << "<\/div>";
+		f << "<\/body>";
+		f << "<\/html>";
+		f.close();
+		break;
+	}
+	default:
+	{
+		cerr << "The type of output only can be CHAR_HTML or COLOR_HTML\n";
+		system("pause");
+		exit(0);
+	}
+	}
 };
 
