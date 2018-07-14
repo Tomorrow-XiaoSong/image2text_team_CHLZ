@@ -230,26 +230,42 @@ else {
 
 char* Image2Text::huiduMatrix_to_charImage(const huiduMatrix &huiduMatrix)
 {
-	char huidu_char[] = "EBQDPLbqyzvi;,. ";						//灰度字符
+	char huidu_char[] = "WKQNEFAUBdPTLbqyuzcvri;_:,. ";				//灰度字符
 	char_image = new char[huidu_matrix.height*huidu_matrix.width + 1];
 	for (int j = 0; j < huidu_matrix.height; j++) {					//根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
 		for (int i = 0; i < huidu_matrix.width; i++) {
-			if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 16)char_image[j*huidu_matrix.width + i] = huidu_char[0];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 32)char_image[j*huidu_matrix.width + i] = huidu_char[1];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 48)char_image[j*huidu_matrix.width + i] = huidu_char[2];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 64)char_image[j*huidu_matrix.width + i] = huidu_char[3];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 80)char_image[j*huidu_matrix.width + i] = huidu_char[4];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 96)char_image[j*huidu_matrix.width + i] = huidu_char[5];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 112)char_image[j*huidu_matrix.width + i] = huidu_char[6];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 128)char_image[j*huidu_matrix.width + i] = huidu_char[7];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 144)char_image[j*huidu_matrix.width + i] = huidu_char[8];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 160)char_image[j*huidu_matrix.width + i] = huidu_char[9];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 176)char_image[j*huidu_matrix.width + i] = huidu_char[10];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 192)char_image[j*huidu_matrix.width + i] = huidu_char[11];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 208)char_image[j*huidu_matrix.width + i] = huidu_char[12];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 224)char_image[j*huidu_matrix.width + i] = huidu_char[13];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 240)char_image[j*huidu_matrix.width + i] = huidu_char[14];
-			else char_image[j*huidu_matrix.width + i] = huidu_char[15];
+			if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 8)char_image[j*huidu_matrix.width + i] = huidu_char[0];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 16)char_image[j*huidu_matrix.width + i] = huidu_char[0];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 24)char_image[j*huidu_matrix.width + i] = huidu_char[1];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 32)char_image[j*huidu_matrix.width + i] = huidu_char[2];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 40)char_image[j*huidu_matrix.width + i] = huidu_char[3];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 48)char_image[j*huidu_matrix.width + i] = huidu_char[4];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 56)char_image[j*huidu_matrix.width + i] = huidu_char[5];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 64)char_image[j*huidu_matrix.width + i] = huidu_char[6];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 72)char_image[j*huidu_matrix.width + i] = huidu_char[7];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 80)char_image[j*huidu_matrix.width + i] = huidu_char[8];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 88)char_image[j*huidu_matrix.width + i] = huidu_char[9];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 96)char_image[j*huidu_matrix.width + i] = huidu_char[10];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 104)char_image[j*huidu_matrix.width + i] = huidu_char[11];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 112)char_image[j*huidu_matrix.width + i] = huidu_char[12];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 120)char_image[j*huidu_matrix.width + i] = huidu_char[13];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 128)char_image[j*huidu_matrix.width + i] = huidu_char[14];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 136)char_image[j*huidu_matrix.width + i] = huidu_char[15];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 144)char_image[j*huidu_matrix.width + i] = huidu_char[16];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 152)char_image[j*huidu_matrix.width + i] = huidu_char[17];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 160)char_image[j*huidu_matrix.width + i] = huidu_char[18];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 168)char_image[j*huidu_matrix.width + i] = huidu_char[19];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 176)char_image[j*huidu_matrix.width + i] = huidu_char[20];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 184)char_image[j*huidu_matrix.width + i] = huidu_char[20];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 192)char_image[j*huidu_matrix.width + i] = huidu_char[21];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 200)char_image[j*huidu_matrix.width + i] = huidu_char[22];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 208)char_image[j*huidu_matrix.width + i] = huidu_char[23];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 216)char_image[j*huidu_matrix.width + i] = huidu_char[24];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 224)char_image[j*huidu_matrix.width + i] = huidu_char[25];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 232)char_image[j*huidu_matrix.width + i] = huidu_char[26];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 240)char_image[j*huidu_matrix.width + i] = huidu_char[26];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 248)char_image[j*huidu_matrix.width + i] = huidu_char[27];
+			else char_image[j*huidu_matrix.width + i] = huidu_char[27];
 		}
 	}
 	return char_image;
@@ -257,26 +273,42 @@ char* Image2Text::huiduMatrix_to_charImage(const huiduMatrix &huiduMatrix)
 
 char* Image2Text::huiduMatrix_to_charHtml(const huiduMatrix &huiduMatrix)
 {
-	char huidu_char[] = "EBQDPLbqyzvi;:,.";						//灰度字符————未完成————未优化
+	char huidu_char[] = "WKQNEFAUBdPTLbqyuzcvri;_:^,.";				//灰度字符
 	char_image = new char[huidu_matrix.height*huidu_matrix.width + 1];
 	for (int j = 0; j < huidu_matrix.height; j++) {					//根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
 		for (int i = 0; i < huidu_matrix.width; i++) {
-			if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 16)char_image[j*huidu_matrix.width + i] = huidu_char[0];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 32)char_image[j*huidu_matrix.width + i] = huidu_char[1];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 48)char_image[j*huidu_matrix.width + i] = huidu_char[2];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 64)char_image[j*huidu_matrix.width + i] = huidu_char[3];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 80)char_image[j*huidu_matrix.width + i] = huidu_char[4];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 96)char_image[j*huidu_matrix.width + i] = huidu_char[5];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 112)char_image[j*huidu_matrix.width + i] = huidu_char[6];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 128)char_image[j*huidu_matrix.width + i] = huidu_char[7];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 144)char_image[j*huidu_matrix.width + i] = huidu_char[8];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 160)char_image[j*huidu_matrix.width + i] = huidu_char[9];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 176)char_image[j*huidu_matrix.width + i] = huidu_char[10];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 192)char_image[j*huidu_matrix.width + i] = huidu_char[11];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 208)char_image[j*huidu_matrix.width + i] = huidu_char[12];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 224)char_image[j*huidu_matrix.width + i] = huidu_char[13];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 240)char_image[j*huidu_matrix.width + i] = huidu_char[14];
-			else char_image[j*huidu_matrix.width + i] = huidu_char[15];
+			if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 8)char_image[j*huidu_matrix.width + i] = huidu_char[0];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 16)char_image[j*huidu_matrix.width + i] = huidu_char[0];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 24)char_image[j*huidu_matrix.width + i] = huidu_char[1];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 32)char_image[j*huidu_matrix.width + i] = huidu_char[2];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 40)char_image[j*huidu_matrix.width + i] = huidu_char[3];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 48)char_image[j*huidu_matrix.width + i] = huidu_char[4];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 56)char_image[j*huidu_matrix.width + i] = huidu_char[5];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 64)char_image[j*huidu_matrix.width + i] = huidu_char[6];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 72)char_image[j*huidu_matrix.width + i] = huidu_char[7];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 80)char_image[j*huidu_matrix.width + i] = huidu_char[8];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 88)char_image[j*huidu_matrix.width + i] = huidu_char[9];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 96)char_image[j*huidu_matrix.width + i] = huidu_char[10];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 104)char_image[j*huidu_matrix.width + i] = huidu_char[11];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 112)char_image[j*huidu_matrix.width + i] = huidu_char[12];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 120)char_image[j*huidu_matrix.width + i] = huidu_char[13];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 128)char_image[j*huidu_matrix.width + i] = huidu_char[14];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 136)char_image[j*huidu_matrix.width + i] = huidu_char[15];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 144)char_image[j*huidu_matrix.width + i] = huidu_char[16];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 152)char_image[j*huidu_matrix.width + i] = huidu_char[17];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 160)char_image[j*huidu_matrix.width + i] = huidu_char[18];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 168)char_image[j*huidu_matrix.width + i] = huidu_char[19];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 176)char_image[j*huidu_matrix.width + i] = huidu_char[20];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 184)char_image[j*huidu_matrix.width + i] = huidu_char[20];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 192)char_image[j*huidu_matrix.width + i] = huidu_char[21];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 200)char_image[j*huidu_matrix.width + i] = huidu_char[22];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 208)char_image[j*huidu_matrix.width + i] = huidu_char[23];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 216)char_image[j*huidu_matrix.width + i] = huidu_char[24];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 224)char_image[j*huidu_matrix.width + i] = huidu_char[25];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 232)char_image[j*huidu_matrix.width + i] = huidu_char[26];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 240)char_image[j*huidu_matrix.width + i] = huidu_char[26];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 248)char_image[j*huidu_matrix.width + i] = huidu_char[27];
+			else char_image[j*huidu_matrix.width + i] = huidu_char[27];
 		}
 	}
 	return char_image;
@@ -284,26 +316,42 @@ char* Image2Text::huiduMatrix_to_charHtml(const huiduMatrix &huiduMatrix)
 
 char* Image2Text::huiduMatrix_to_colorCharHtml(const huiduMatrix &huiduMatrix)
 {
-	char huidu_char[] = "EBQDPLbqyzvi;:,.";						//灰度字符————未完成————未优化
+	char huidu_char[] = "WKQNEFAUBdPTLbqyuzcvri;_:^,.";				//灰度字符
 	char_image = new char[huidu_matrix.height*huidu_matrix.width + 1];
 	for (int j = 0; j < huidu_matrix.height; j++) {					//根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
 		for (int i = 0; i < huidu_matrix.width; i++) {
-			if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 16)char_image[j*huidu_matrix.width + i] = huidu_char[0];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 32)char_image[j*huidu_matrix.width + i] = huidu_char[1];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 48)char_image[j*huidu_matrix.width + i] = huidu_char[2];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 64)char_image[j*huidu_matrix.width + i] = huidu_char[3];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 80)char_image[j*huidu_matrix.width + i] = huidu_char[4];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 96)char_image[j*huidu_matrix.width + i] = huidu_char[5];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 112)char_image[j*huidu_matrix.width + i] = huidu_char[6];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 128)char_image[j*huidu_matrix.width + i] = huidu_char[7];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 144)char_image[j*huidu_matrix.width + i] = huidu_char[8];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 160)char_image[j*huidu_matrix.width + i] = huidu_char[9];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 176)char_image[j*huidu_matrix.width + i] = huidu_char[10];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 192)char_image[j*huidu_matrix.width + i] = huidu_char[11];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 208)char_image[j*huidu_matrix.width + i] = huidu_char[12];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 224)char_image[j*huidu_matrix.width + i] = huidu_char[13];
-			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 240)char_image[j*huidu_matrix.width + i] = huidu_char[14];
-			else char_image[j*huidu_matrix.width + i] = huidu_char[15];
+			if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 8)char_image[j*huidu_matrix.width + i] = huidu_char[0];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 16)char_image[j*huidu_matrix.width + i] = huidu_char[0];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 24)char_image[j*huidu_matrix.width + i] = huidu_char[1];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 32)char_image[j*huidu_matrix.width + i] = huidu_char[2];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 40)char_image[j*huidu_matrix.width + i] = huidu_char[3];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 48)char_image[j*huidu_matrix.width + i] = huidu_char[4];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 56)char_image[j*huidu_matrix.width + i] = huidu_char[5];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 64)char_image[j*huidu_matrix.width + i] = huidu_char[6];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 72)char_image[j*huidu_matrix.width + i] = huidu_char[7];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 80)char_image[j*huidu_matrix.width + i] = huidu_char[8];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 88)char_image[j*huidu_matrix.width + i] = huidu_char[9];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 96)char_image[j*huidu_matrix.width + i] = huidu_char[10];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 104)char_image[j*huidu_matrix.width + i] = huidu_char[11];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 112)char_image[j*huidu_matrix.width + i] = huidu_char[12];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 120)char_image[j*huidu_matrix.width + i] = huidu_char[13];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 128)char_image[j*huidu_matrix.width + i] = huidu_char[14];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 136)char_image[j*huidu_matrix.width + i] = huidu_char[15];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 144)char_image[j*huidu_matrix.width + i] = huidu_char[16];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 152)char_image[j*huidu_matrix.width + i] = huidu_char[17];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 160)char_image[j*huidu_matrix.width + i] = huidu_char[18];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 168)char_image[j*huidu_matrix.width + i] = huidu_char[19];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 176)char_image[j*huidu_matrix.width + i] = huidu_char[20];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 184)char_image[j*huidu_matrix.width + i] = huidu_char[20];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 192)char_image[j*huidu_matrix.width + i] = huidu_char[21];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 200)char_image[j*huidu_matrix.width + i] = huidu_char[22];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 208)char_image[j*huidu_matrix.width + i] = huidu_char[23];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 216)char_image[j*huidu_matrix.width + i] = huidu_char[24];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 224)char_image[j*huidu_matrix.width + i] = huidu_char[25];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 232)char_image[j*huidu_matrix.width + i] = huidu_char[26];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 240)char_image[j*huidu_matrix.width + i] = huidu_char[26];
+			else if (huidu_matrix.matrix[j*huidu_matrix.width + i] <= 248)char_image[j*huidu_matrix.width + i] = huidu_char[27];
+			else char_image[j*huidu_matrix.width + i] = huidu_char[27];
 		}
 	}
 	return char_image;
