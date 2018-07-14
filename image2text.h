@@ -29,8 +29,8 @@
 #define CHARIMAGE_HEIGHT 70
 #define CHARHTML_WIDTH 100
 #define CHARHTML_HEIGHT 100
-#define COLORHTML_WIDTH 500
-#define COLORHTML_HEIGHT 500
+#define COLORHTML_WIDTH 200
+#define COLORHTML_HEIGHT 200
 enum pictureQuality { NONDESTRUCTIVE_TXT, CHAR_TXT,COLOR_HTML,CHAR_HTML };
 								//用户输出模式 枚举
 
@@ -57,7 +57,7 @@ private:
 	}color_matrix;						//实例化对象
 	Mat input_image;					//记录输入的图片
 	char* char_image;					//字符画数组
-
+private:
 	huiduMatrix RGB_to_huiduMatrix(Mat RGB, int type, int width, int height);
 								//width:输出矩阵的宽度，height:输出矩阵的高度,缺省值为NONDESTRUCTIVE_WIDTH NONDESTRUCTIVE_HEIGHT
 								//可以不给长宽参数，默认为NONDESTRUCTIVE_WIDTH和NONDESTRUCTIVE_HEIGHT
@@ -72,7 +72,10 @@ private:
 
 	char* huiduMatrix_to_charHtml(const huiduMatrix &huiduMatrix);
 								//灰度矩阵 转 字符画，返回值可以做为.html文件内容
-
+	
+	char* huiduMatrix_to_colorCharHtml(const huiduMatrix &huiduMatrix);
+								//彩图的灰度矩阵 转 字符画，返回值可以做为.html文件内容
+	
 	char* huiduMatrix_to_nondestructiveImage(const huiduMatrix &huidu_matrix);
 								//灰度矩阵 转 无损画，返回值仅能作为.txt 的文件内容
 	
