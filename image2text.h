@@ -93,7 +93,7 @@ public:
 	void to_txt(string output_address,int type_of_outputImage,int width = NONINPUT,int height = NONINPUT);
 								//根据用户选择输出.txt，可以是无损，也可以是字符画
 
-	void to_html(string output_address,int width = NONINPUT, int height = NONINPUT);
+	void to_html(string output_address, int type_of_outout, int width = NONINPUT, int height = NONINPUT);
 								//输出.html
 };
 
