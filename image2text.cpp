@@ -17,6 +17,32 @@ Image2Text::~Image2Text() {
 	delete[] color_matrix.matrix;
 }
 
+void Image2Text::control_output_format(string outputAddress, int outputFormat)
+{
+	//根据地址string后几位，判断后几位是否为.txt 或 .html，不是的话，在地址结尾加上
+	switch (outputFormat)
+	{
+	case HTML:
+	{
+		if (outputAddress.length()<5 || outputAddress.substr(outputAddress.length() - 5, 5) != ".html") {
+			outputAddress += ".html";
+		}
+		break;
+	}
+	case TXT:
+		if (outputAddress.length()<4 || outputAddress.substr(outputAddress.length() - 4, 4) != ".txt") {
+			outputAddress += ".txt";
+		}
+		break;
+	default:
+	{
+		cerr << "The format of the output file only can be .html or .txt\n";
+		exit(0);
+		break;
+	}
+	}
+}
+
 Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int type, int width, int height) 
 {											//返回值为类内声明的结构体
 	//彩图 转 灰度图片 
@@ -328,10 +354,7 @@ void Image2Text::to_txt(string output_address, int type_of_outputImage, int widt
 	}
 
 	//标准化输出文件的命名格式为 xxx.txt
-	if (output_address.substr(output_address.length() - 4, 4) != ".txt") {
-		string a = output_address.substr(output_address.length() - 5, 4);
-		output_address += ".txt";
-	}
+	control_output_format(output_address, TXT);
 
 	//将生成的字符画图片储存
 	ofstream f(output_address, ios::out);
@@ -355,9 +378,7 @@ void Image2Text::to_html(string output_address, int width, int height)
 	nc = RGB_to_huiduMatrix(this->input_image,CHAR_HTML, width, height).width;
 	
 	//标准化输出文件的命名格式为 xxx.html
-	if (output_address.substr(output_address.length() - 5, 5) != ".html") {
-		output_address += ".html";
-	}
+	control_output_format(output_address, HTML);
 	
 	//.html文件生成保存
 	ofstream f(output_address, ios::out);
