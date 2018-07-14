@@ -59,7 +59,7 @@ private:
 	Mat input_image;					//记录输入的图片
 	char* char_image;					//字符画数组
 private:
-	void control_output_format(string outputAddress, int outputFormat);
+	void control_output_format(string& outputAddress, int outputFormat);
 								//判断并控制输出为.txt 或者.html
 	
 	huiduMatrix RGB_to_huiduMatrix(Mat RGB, int type, int width, int height);
