@@ -401,6 +401,7 @@ char* Image2Text::huiduMatrix_to_charTXT(const huiduMatrix &huiduMatrix,int type
 			else char_image[j*huidu_matrix.width + i] = huidu_char[27];
 		}
 	}
+	delete[]huidu_char;
 	return char_image;
 }
 
@@ -472,6 +473,7 @@ char* Image2Text::huiduMatrix_to_charHtml(const huiduMatrix &huiduMatrix,int typ
 			else char_image[j*huidu_matrix.width + i] = huidu_char[27];
 		}
 	}
+	delete[]huidu_char;
 	return char_image;
 }
 
@@ -561,6 +563,7 @@ char* Image2Text::huiduMatrix_to_nondestructiveTXT(const huiduMatrix &huidu_matr
 			else char_image[j*huidu_matrix.width + i] = huidu_char[6];
 		}
 	}
+	delete[]huidu_char;
 	return char_image;
 }
 
@@ -632,6 +635,7 @@ char* Image2Text::huiduMatrix_to_nondestructiveHtml(const huiduMatrix &huiduMatr
 			else char_image[j*huidu_matrix.width + i] = huidu_char[27];
 		}
 	}
+	delete[]huidu_char;
 	return char_image;
 }
 
