@@ -6,6 +6,7 @@ Image2Text::Image2Text(string input_image_address)
 	input_image = imread(input_image_address, IMREAD_UNCHANGED);			//打开方式为：IMREAD_UNCHANGED,8位，彩色或非彩色
 	if (input_image.empty()) {							//打开错误时发送错误信息
 		cerr << "Error! The input image can't be read...\n";
+		system("pause");
 		exit(0);
 	}
 
@@ -36,6 +37,7 @@ void Image2Text::control_output_format(string& outputAddress, int outputFormat)
 	default:
 	{
 		cerr << "The format of the output file only can be .html or .txt\n";
+		system("pause");
 		exit(0);
 		break;
 	}
@@ -227,9 +229,37 @@ else {
 	return color_matrix;
 }
 
-char* Image2Text::huiduMatrix_to_charImage(const huiduMatrix &huiduMatrix)
+char* Image2Text::huiduMatrix_to_charTXT(const huiduMatrix &huiduMatrix,int type)
 {
-	char huidu_char[] = "WKQNEFAUBdPTLbqyuzcvri;_:,. ";				//灰度字符
+	char* huidu_char;
+	switch (type) {
+	case CHAR_TXT:
+	{
+		string huidu = "WKQNEFAUBdPTLbqyuzcvri;_:,. ";				//灰度字符
+		int huiduStr_length = huidu.length();
+		huidu_char = new char [huiduStr_length];
+		for (int i = 0; i < huiduStr_length; i++) {
+			huidu_char[i] = huidu[i];
+		}
+		break;
+	}
+	case REVERSAL_CHAR_TXT:
+	{
+		string huidu = " .,:,;irvczuyqbLTPdBUAFENQKW";				//反转灰度字符灰度字符
+		int huiduStr_length = huidu.length();
+		huidu_char = new char[huiduStr_length];
+		for (int i = 0; i < huiduStr_length; i++) {
+			huidu_char[i] = huidu[i];
+		}
+		break;
+	}
+	default:
+	{
+		cerr << "the type of the charTXT can only be CHAR_TXT and REVERSAL_CHAR_TXT\n";
+		system("pause");
+		exit(0);
+	}
+	}
 	char_image = new char[huidu_matrix.height*huidu_matrix.width + 1];
 	for (int j = 0; j < huidu_matrix.height; j++) {					//根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
 		for (int i = 0; i < huidu_matrix.width; i++) {
@@ -356,8 +386,36 @@ char* Image2Text::huiduMatrix_to_colorCharHtml(const huiduMatrix &huiduMatrix)
 	return char_image;
 }
 
-char* Image2Text::huiduMatrix_to_nondestructiveImage(const huiduMatrix &huidu_matrix) {
-	char huidu_char[] = "@#xo+. ";							//灰度字符
+char* Image2Text::huiduMatrix_to_nondestructiveImage(const huiduMatrix &huidu_matrix,int type) {
+	char* huidu_char;
+	switch (type) {
+	case NONDESTRUCTIVE_TXT:
+	{
+		string huidu = "@#xo+. ";				//灰度字符
+		int huiduStr_length = huidu.length();
+		huidu_char = new char[huiduStr_length];
+		for (int i = 0; i < huiduStr_length; i++) {
+			huidu_char[i] = huidu[i];
+		}
+		break;
+	}
+	case REVERSAL_NONDESTRUCTIVE_TXT:
+	{
+		string huidu = " .+ox#@";				//反转灰度字符灰度字符
+		int huiduStr_length = huidu.length();
+		huidu_char = new char[huiduStr_length];
+		for (int i = 0; i < huiduStr_length; i++) {
+			huidu_char[i] = huidu[i];
+		}
+		break;
+	}
+	default:
+	{
+		cerr << "the type of the charTXT can only be NONDESTRUCTIVE_TXT and REVERSAL_NONDESTRUCTIVE_TXT\n";
+		system("pause");
+		exit(0);
+	}
+	}
 	char_image = new char[huidu_matrix.height*huidu_matrix.width + 1];
 	for (int j = 0; j < huidu_matrix.height; j++) {					//根据灰度矩阵的像素值给灰度图片的每个像素匹配字符
 		for (int i = 0; i < huidu_matrix.width; i++) {				//0-35:@   36-71:#   72-108:x   109-144:o   145-180:+   181-216:-   217-255: 
@@ -386,9 +444,23 @@ void Image2Text::to_txt(string output_address, int type_of_outputImage, int widt
 	}
 	case CHAR_TXT:									//txt格式：宋体 黑体 大小8  max70*70
 	{
-		result_image = huiduMatrix_to_charImage(RGB_to_huiduMatrix(this->input_image,CHAR_TXT,width,height));
+		result_image = huiduMatrix_to_charTXT(RGB_to_huiduMatrix(this->input_image, CHAR_TXT, width, height));
 		nl = RGB_to_huiduMatrix(this->input_image, CHAR_TXT,width,height).height;
 		nc = RGB_to_huiduMatrix(this->input_image, CHAR_TXT,width,height).width;
+		break;
+	}
+	case REVERSAL_CHAR_TXT:
+	{
+		result_image = huiduMatrix_to_charTXT(RGB_to_huiduMatrix(this->input_image, CHAR_TXT, width, height),REVERSAL_CHAR_TXT);
+		nl = RGB_to_huiduMatrix(this->input_image, CHAR_TXT, width, height).height;
+		nc = RGB_to_huiduMatrix(this->input_image, CHAR_TXT, width, height).width;
+		break;
+	}
+	case REVERSAL_NONDESTRUCTIVE_TXT:
+	{
+		result_image = huiduMatrix_to_nondestructiveImage(RGB_to_huiduMatrix(this->input_image, NONDESTRUCTIVE_TXT, width, height), REVERSAL_NONDESTRUCTIVE_TXT);
+		nl = RGB_to_huiduMatrix(this->input_image, NONDESTRUCTIVE_TXT, width, height).height;
+		nc = RGB_to_huiduMatrix(this->input_image, NONDESTRUCTIVE_TXT, width, height).width;
 		break;
 	}
 	default:									//type_of_outputImage为未定义的格式时，打印错误信息
