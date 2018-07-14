@@ -1,17 +1,32 @@
-/*************************************用户调用指南******************************************/
-/***   1、用户定义Image2Text类的一个对象的同时要给对象提供构造参数：输入图片的地址            ***/
-/***   	例：Image2Text test("C:\\picture.jpg"）                                          ***/
-/***   2、根据您想要的输出模式：.txt 或者 .html 选择对应的函数                              ***/
-/***    例：test.to_txt( v1, v2, v3 = ,v4 = )可以输出.txt文件                             ***/
-/***        第一个参数: 输出地址                                                          ***/
-/***        第二个参数: 想输出的类型：NONDESTRUCTIVEIMAGE无损图片                          ***/
-/***                                  CHARIMAGE字符画                                    ***/
-/***        当选择字符画输出类型的时候，可以选择提供输出的字符画的宽度v3和高度v4              ***/
-/***                                                                                    ***/
-/***        test.to_html()                                                              ***/
-/***                                                                                    ***/
-/***                                                                                    ***/
-/******************************************************************************************/
+/**************************************************功能调用指南**************************************************************/
+//	类Image2Text对用户开发的功能函数共有两个：
+//	1、根据图片及用户要求生成.txt文件
+//	（1）函数原型：void to_txt(string output_address, int type_of_output, int width = NONINPUT, int height = NONINPUT);
+//	（2）参数说明：
+//	output_address：控制输出图片地址
+//	type_of_output：控制输出模式
+//		（1）CHAR_TXT:黑白字符画
+//		（2）REVERSAL_CHAR_TXT:黑白反转输出的字符画
+//		（3）NONDESTRUCTIVE_TXT：高清晰度黑白字符画
+//		（4）REVERSAL_NONDESTRUVTIVE_TXT:高清晰度黑白反转字符画
+//	width：输出图片的width，带缺省值
+//	height：输出图片的height，带缺省值
+//	注：用户可自定义width与height，也可不提供。不提供时，会根据输入图片比例输出较佳的大小。
+//	2、根据图片及用户要求生成.html文件
+//	（1）函数原型：void to_html(string output_address, int type_of_output, int width = NONINPUT, int height = NONINPUT);
+//	（2）参数说明：
+//	output_address：控制输出图片地址
+//	type_of_output：控制输出模式
+//		（1）CHAR_HTML:黑白字符画
+//		（2）REVISE_CHAR_HTML:黑白反转输出的字符画
+//		（3）NONDESTRUCTIVE_HTML:高清晰度黑白字符画
+//		（4）REVERSAL_NINDESTRUCTIVE_HTML:生成.html格式的高清晰度黑白反转字符画
+//		（5）COLOR_HTML:彩色字符画
+//		（6）NONDESTRUCTIVE_HTML:高清晰度彩色字符画
+//	width：输出图片的width，带缺省值
+//	height：输出图片的height，带缺省值
+//	注：用户可自定义width与height，也可不提供。不提供时，会根据输入图片比例输出较佳的大小
+/***************************************************************************************************************************/
 
 #ifndef IMAGE2TEXT_H
 #define IMAGE2REXT_H
@@ -23,16 +38,19 @@
 
 //宏定义，作缺省值
 #define NONINPUT -1314						//用户无输入的缺省值，用于判断
-#define NONDESTRUCTIVE_WIDTH 500
-#define NONDESTRUCTIVE_HEIGHT 500
 #define CHARIMAGE_WIDTH 70
 #define CHARIMAGE_HEIGHT 70
+#define NONDESTRUCTIVE_WIDTH 500
+#define NONDESTRUCTIVE_HEIGHT 500
 #define CHARHTML_WIDTH 100
 #define CHARHTML_HEIGHT 100
-#define NONDESTRUCTIVE_COLORHTML_WIDTH 210
-#define NONDESTRUCTIVE_COLORHTML_HEIGHT 210
+#define NONDESTRUCTIVE_HTML_WIDTH 1200
+#define NONDESTRUCTIVE_HTML_HEIGHT 1200
 #define COLORHTML_WIDTH 70
 #define COLORHTML_HEIGHT 70
+#define NONDESTRUCTIVE_COLORHTML_WIDTH 215
+#define NONDESTRUCTIVE_COLORHTML_HEIGHT 215
+
 enum outputMode { NONDESTRUCTIVE_TXT, CHAR_TXT, CHAR_HTML, COLOR_HTML, NONDESTRUCTIVE_HTML, REVERSAL_CHAR_TXT, REVERSAL_NONDESTRUCTIVE_TXT };
 								//用户输出模式 枚举
 enum format { HTML, TXT };					//用户输出文件格式控制，枚举
@@ -70,22 +88,24 @@ private:
 								//可以只给一个参数：width，height会设置为NONDESTRUCTIVE_HEIGHT
 								//但注意不能只给height
 	
-	colorMatrix RGB_to_colorMatrix(Mat RGB, int width = NONINPUT, int height = NONINPUT);
+	colorMatrix RGB_to_colorMatrix(Mat RGB,int type, int width = NONINPUT, int height = NONINPUT);
 								//返回值为彩色图片矩阵的结构体，该结构体内有：彩色像素结构体矩阵指针，彩色像素结构体矩阵的长、高
 
 	char* huiduMatrix_to_charTXT(const huiduMatrix &huiduMatrix, int type = CHAR_TXT);
 								//灰度矩阵 转 字符画，返回值可以做为.txt文件内容
 								//type可选择正常输出或者反转输出
 	
-	char* huiduMatrix_to_charHtml(const huiduMatrix &huiduMatrix);
+	char* huiduMatrix_to_charHtml(const huiduMatrix &huiduMatrix,int type = CHAR_HTML);
 								//灰度矩阵 转 字符画，返回值可以做为.html文件内容
 	
 	char* huiduMatrix_to_colorCharHtml(const huiduMatrix &huiduMatrix);
 								//彩图的灰度矩阵 转 字符画，返回值可以做为.html文件内容
 	
-	char* huiduMatrix_to_nondestructiveImage(const huiduMatrix &huidu_matrix,int type = NONDESTRUCTIVE_TXT);
-								//灰度矩阵 转 无损画，返回值仅能作为.txt 的文件内容
-								//type可选择正常输出或者反转输出
+	char* huiduMatrix_to_nondestructiveTXT(const huiduMatrix &huidu_matrix,int type = NONDESTRUCTIVE_TXT);
+								//灰度矩阵 转 无损画，返回值作为.txt 的文件内容
+	
+	char* huiduMatrix_to_nondestructiveHtml(const huiduMatrix &huiduMatrix,int type = NONDESTRUCTIVE_HTML);
+								//灰度矩阵 转 无损画，返回值.html 的文件内容
 	
 public:
 	Image2Text(string input_image_address);
