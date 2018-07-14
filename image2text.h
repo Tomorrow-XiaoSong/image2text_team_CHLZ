@@ -29,10 +29,11 @@
 #define CHARIMAGE_HEIGHT 70
 #define CHARHTML_WIDTH 100
 #define CHARHTML_HEIGHT 100
-#define COLORHTML_WIDTH 200
-#define COLORHTML_HEIGHT 200
+#define COLORHTML_WIDTH 260
+#define COLORHTML_HEIGHT 260
 enum pictureQuality { NONDESTRUCTIVE_TXT, CHAR_TXT,COLOR_HTML,CHAR_HTML };
 								//用户输出模式 枚举
+enum format { HTML, TXT };					//用户输出文件格式控制，枚举
 
 using namespace std;
 using namespace cv;
@@ -58,6 +59,9 @@ private:
 	Mat input_image;					//记录输入的图片
 	char* char_image;					//字符画数组
 private:
+	void control_output_format(string outputAddress, int outputFormat);
+								//判断并控制输出为.txt 或者.html
+	
 	huiduMatrix RGB_to_huiduMatrix(Mat RGB, int type, int width, int height);
 								//width:输出矩阵的宽度，height:输出矩阵的高度,缺省值为NONDESTRUCTIVE_WIDTH NONDESTRUCTIVE_HEIGHT
 								//可以不给长宽参数，默认为NONDESTRUCTIVE_WIDTH和NONDESTRUCTIVE_HEIGHT
