@@ -1,3 +1,4 @@
+
 #include"image2text.h"
 
 
@@ -39,6 +40,7 @@ Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int type, int wi
 					height = image_height * (NONDESTRUCTIVE_WIDTH / ((double)image_width));
 					image_height = height;
 					width = NONDESTRUCTIVE_WIDTH;
+					image_width = width;
 				}
 				if (image_height >= NONDESTRUCTIVE_HEIGHT) {		//判断高度（包括宽度不符合时经处理变化后的高度）是否符合
 																			//若图片像素高度大于NONDESTRUCTIVE_HEIGHT，则以高度为NONDESTRUCTIVE_HEIGHT对图片按比例进行缩小
@@ -65,6 +67,7 @@ Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int type, int wi
 					height = image_height * (CHARIMAGE_WIDTH / ((double)image_width));
 					image_height = height;
 					width = CHARIMAGE_WIDTH;
+					image_width = width;
 				}
 				if (image_height >= CHARIMAGE_HEIGHT) {			//判断高度（包括宽度不符合时经处理变化后的高度）是否符合
 																			//若图片像素高度大于CHARIMAGE_HEIGHT，则以高度为CHARIMAGE_HEIGHT对图片按比例进行缩小
@@ -92,6 +95,7 @@ Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int type, int wi
 					height = image_height * (CHARHTML_WIDTH / ((double)image_width));
 					image_height = height;
 					width = CHARHTML_WIDTH;
+					image_width = width;
 				}
 				if (image_height >= CHARHTML_HEIGHT) {			//判断高度（包括宽度不符合时经处理变化后的高度）是否符合
 																	//若图片像素高度大于CHARHTML_HEIGHT，则以高度为CHARHTML_HEIGHT对图片按比例进行缩小
@@ -118,6 +122,7 @@ Image2Text::huiduMatrix Image2Text::RGB_to_huiduMatrix(Mat RGB, int type, int wi
 					height = image_height * (COLORHTML_WIDTH / ((double)image_width));
 					image_height = height;
 					width = COLORHTML_WIDTH;
+					image_width = width;
 				}
 				if (image_height >= COLORHTML_HEIGHT) {			//判断高度（包括宽度不符合时经处理变化后的高度）是否符合
 																//若图片像素高度大于COLORHTML_HEIGHT，则以高度为COLORHTML_HEIGHT对图片按比例进行缩小
@@ -170,6 +175,7 @@ else {
 			height = image_height * (COLORHTML_WIDTH / ((double)image_width));
 			image_height = height;
 			width = COLORHTML_WIDTH;
+			image_width = width;
 		}
 		if (image_height >= COLORHTML_HEIGHT) {					//判断高度（包括宽度不符合时经处理变化后的高度）是否符合
 											//若图片像素高度大于COLORHTML_HEIGHT，则以高度为COLORHTML_HEIGHT对图片按比例进行缩小
