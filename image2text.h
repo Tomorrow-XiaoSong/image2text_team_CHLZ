@@ -79,6 +79,8 @@ private:
 	Mat input_image;					//记录输入的图片
 	char* char_image;					//字符画数组
 private:
+	~Image2Text();
+	
 	void control_output_format(string& outputAddress, int outputFormat);
 								//判断并控制输出为.txt 或者.html
 	
@@ -109,7 +111,7 @@ private:
 	
 public:
 	Image2Text(string input_image_address);
-	~Image2Text();
+	
 	void to_txt(string output_address,int type_of_outputImage,int width = NONINPUT,int height = NONINPUT);
 								//根据用户选择输出.txt，可以是无损，也可以是字符画
 
